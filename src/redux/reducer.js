@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 const saveState = state => {
-    localStorage.setItem('todos', JSON.stringify(state))
+  localStorage.setItem('todos', JSON.stringify(state))
 }
 
 export const setFilter = payload => ({
@@ -41,34 +41,34 @@ export const todos = (state = [], { type, payload }) => {
   switch (type) {
     case 'todo/add': {
       const newTodos = state.concat({ ...payload })
-      saveState(newTodos);
-      return newTodos;
+      saveState(newTodos)
+      return newTodos
     }
     case 'todo/update': {
       const newTodos = state.map(todo => {
         if (todo.id === payload.id) { return { ...todo, completed: !todo.completed } }
         return todo
       })
-      saveState(newTodos);
+      saveState(newTodos)
       return newTodos
     }
     case 'todo/delete': {
       const newTodos = state.filter(todo => {
         return todo.id !== payload.id
       })
-      saveState(newTodos);
+      saveState(newTodos)
       return newTodos
     }
     case 'todo/deleteCompleted' : {
       const newTodos = state.filter(todo => todo.completed === false)
-      saveState(newTodos);
+      saveState(newTodos)
       return newTodos
     }
     case 'todo/new': {
-        return payload
+      return payload
     }
     default: {
-        return state
+      return state
     }
   }
 }

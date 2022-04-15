@@ -4,23 +4,23 @@ import Navbar from './components/Navbar'
 import NavButton from './components/Navbar/NavButton'
 import AddItem from './components/AddItem'
 import TodoList from './components/TodoList'
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
-  useEffect(()=>{
-      const todos = JSON.parse(localStorage.getItem('todos'));
-      dispatch({
-        type: 'todo/new',
-        payload: todos
-      });
-      setLoading(false);
-  }, []);
-  if(loading) {
+  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem('todos')) || []
+    dispatch({
+      type: 'todo/new',
+      payload: todos
+    })
+    setLoading(false)
+  }, [])
+  if (loading) {
     return (
-        <Container>Loading...</Container>
+      <Container>Loading...</Container>
     )
   }
   return (
