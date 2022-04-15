@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import Container from './components/Container'
+import Title from './components/Title'
+import Navbar from './components/Navbar'
+import NavButton from './components/Navbar/NavButton'
+import AddItem from './components/AddItem'
+import TodoList from './components/TodoList'
+import {useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux'
 
-function App() {
+const App = () => {
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+      const todos = JSON.parse(localStorage.getItem('todos'));
+      dispatch({
+        type: 'todo/new',
+        payload: todos
+      });
+      setLoading(false);
+  }, []);
+  if(loading) {
+    return (
+        <Container>Loading...</Container>
+    )
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Container>
+      <Title>#todo</Title>
+      <Navbar>
+        <NavButton filter='all'>All</NavButton>
+        <NavButton filter='active'>Active</NavButton>
+        <NavButton filter='completed'>Completed</NavButton>
+      </Navbar>
+      <AddItem />
+      <TodoList />
+    </Container>
+  )
 }
-
-export default App;
+export default App
