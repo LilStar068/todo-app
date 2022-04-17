@@ -8,7 +8,7 @@ const TodoList = () => {
   const dispatch = useDispatch()
   const { filter } = useSelector(state => state)
   return (
-    <div>
+    <div className={`md:px-0 px-4 ${filter === 'completed' ? 'pt-5' : ''} `}>
       {todos.map((todo) => (
         <TodoItem todo={todo} key={todo.id} />
       ))}
