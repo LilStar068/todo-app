@@ -10,7 +10,7 @@ Tech used:
 * localStorage
 
 ## `src/App.js`
-Here I verify if the localStorage has "to-do" items, if yes then update the reducer using them, if not it updates the reducer with an empty array. While this is happening a "Loading..." message is displayed.
+Here I verify if the localStorage has “to-do” items, if so I update the reducer using the items, if not I update the reducer with an empty array. While this is happening a “Loading...” message is displayed.
 
 ## `src/redux/reducer.js`
 Here is all the logic of the reducer and other things:
